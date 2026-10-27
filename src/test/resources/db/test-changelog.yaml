@@ -1,0 +1,13 @@
+databaseChangeLog:
+  - include:
+      file: db/changelog/db.changelog-master.yaml
+  - changeSet:
+      id: test-h2-text-compatibility
+      author: test
+      dbms: h2
+      changes:
+        - modifyDataType:
+            tableName: products
+            columnName: description
+            newDataType: VARCHAR(10000)
+

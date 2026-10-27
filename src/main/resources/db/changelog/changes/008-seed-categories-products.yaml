@@ -1,0 +1,121 @@
+databaseChangeLog:
+  - changeSet:
+      id: 008-seed-categories
+      author: student
+      changes:
+        - insert:
+            tableName: categories
+            columns:
+              - column: { name: id, valueNumeric: 1 }
+              - column: { name: name, value: "Молочные продукты" }
+        - insert:
+            tableName: categories
+            columns:
+              - column: { name: id, valueNumeric: 2 }
+              - column: { name: name, value: "Хлеб и выпечка" }
+        - insert:
+            tableName: categories
+            columns:
+              - column: { name: id, valueNumeric: 3 }
+              - column: { name: name, value: "Напитки" }
+
+  - changeSet:
+      id: 008-seed-products
+      author: student
+      changes:
+        - insert:
+            tableName: products
+            columns:
+              - column: { name: id, valueNumeric: 1 }
+              - column: { name: name, value: "Молоко 3,2%, 1 л" }
+              - column: { name: description, value: "Пастеризованное молоко в тетрапаке" }
+              - column: { name: price, valueNumeric: 89.90 }
+              - column: { name: stock_quantity, valueNumeric: 120 }
+              - column: { name: category_id, valueNumeric: 1 }
+        - insert:
+            tableName: products
+            columns:
+              - column: { name: id, valueNumeric: 2 }
+              - column: { name: name, value: "Кефир 2,5%, 0,9 л" }
+              - column: { name: description, value: "Классический кефир" }
+              - column: { name: price, valueNumeric: 79.00 }
+              - column: { name: stock_quantity, valueNumeric: 85 }
+              - column: { name: category_id, valueNumeric: 1 }
+        - insert:
+            tableName: products
+            columns:
+              - column: { name: id, valueNumeric: 3 }
+              - column: { name: name, value: "Сыр «Российский», 200 г" }
+              - column: { name: description, value: "Полутвёрдый сыр, нарезка" }
+              - column: { name: price, valueNumeric: 219.50 }
+              - column: { name: stock_quantity, valueNumeric: 40 }
+              - column: { name: category_id, valueNumeric: 1 }
+        - insert:
+            tableName: products
+            columns:
+              - column: { name: id, valueNumeric: 4 }
+              - column: { name: name, value: "Хлеб «Бородинский», 400 г" }
+              - column: { name: description, value: "Ржано-пшеничный хлеб с кориандром" }
+              - column: { name: price, valueNumeric: 55.00 }
+              - column: { name: stock_quantity, valueNumeric: 200 }
+              - column: { name: category_id, valueNumeric: 2 }
+        - insert:
+            tableName: products
+            columns:
+              - column: { name: id, valueNumeric: 5 }
+              - column: { name: name, value: "Батон нарезной, 400 г" }
+              - column: { name: description, value: "Пшеничный батон" }
+              - column: { name: price, valueNumeric: 45.00 }
+              - column: { name: stock_quantity, valueNumeric: 150 }
+              - column: { name: category_id, valueNumeric: 2 }
+        - insert:
+            tableName: products
+            columns:
+              - column: { name: id, valueNumeric: 6 }
+              - column: { name: name, value: "Круассан с шоколадом, 80 г" }
+              - column: { name: description, value: "Сдобный круассан" }
+              - column: { name: price, valueNumeric: 69.00 }
+              - column: { name: stock_quantity, valueNumeric: 60 }
+              - column: { name: category_id, valueNumeric: 2 }
+        - insert:
+            tableName: products
+            columns:
+              - column: { name: id, valueNumeric: 7 }
+              - column: { name: name, value: "Вода питьевая, 1,5 л" }
+              - column: { name: description, value: "Негазированная" }
+              - column: { name: price, valueNumeric: 39.00 }
+              - column: { name: stock_quantity, valueNumeric: 300 }
+              - column: { name: category_id, valueNumeric: 3 }
+        - insert:
+            tableName: products
+            columns:
+              - column: { name: id, valueNumeric: 8 }
+              - column: { name: name, value: "Сок апельсиновый, 1 л" }
+              - column: { name: description, value: "100% сок, без сахара" }
+              - column: { name: price, valueNumeric: 129.00 }
+              - column: { name: stock_quantity, valueNumeric: 75 }
+              - column: { name: category_id, valueNumeric: 3 }
+        - insert:
+            tableName: products
+            columns:
+              - column: { name: id, valueNumeric: 9 }
+              - column: { name: name, value: "Чай чёрный, 25 пакетиков" }
+              - column: { name: description, value: "Крепкий цейлонский чай" }
+              - column: { name: price, valueNumeric: 149.00 }
+              - column: { name: stock_quantity, valueNumeric: 90 }
+              - column: { name: category_id, valueNumeric: 3 }
+
+  - changeSet:
+      id: 008-reset-sequences
+      author: student
+      changes:
+        - sql:
+            dbms: postgresql
+            sql: >-
+              SELECT setval(pg_get_serial_sequence('categories', 'id'),
+              (SELECT COALESCE(MAX(id), 1) FROM categories), true)
+        - sql:
+            dbms: postgresql
+            sql: >-
+              SELECT setval(pg_get_serial_sequence('products', 'id'),
+              (SELECT COALESCE(MAX(id), 1) FROM products), true)

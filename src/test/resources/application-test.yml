@@ -1,0 +1,14 @@
+spring:
+  liquibase:
+    change-log: classpath:db/test-changelog.yaml
+  datasource:
+    url: jdbc:h2:mem:shop;MODE=PostgreSQL;DATABASE_TO_LOWER=TRUE;DEFAULT_NULL_ORDERING=HIGH;DB_CLOSE_DELAY=-1
+    username: sa
+    password: ""
+    driver-class-name: org.h2.Driver
+app:
+  jwt:
+    secret: test-only-secret-at-least-thirty-two-bytes-long
+  cors:
+    allowed-origins: http://localhost:5500
+
